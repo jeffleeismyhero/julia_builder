@@ -24,7 +24,7 @@ module Julia
 
     def build
       if csv_options[:headers] != false
-        headers = csv_options[:headers] || columns_config.keys
+        headers = csv_options[:headers].is_a?(Array) ? csv_options[:headers] : columns_config.keys
       end
       CSV.generate(csv_options) do |csv|
         csv << headers if headers
