@@ -23,8 +23,11 @@ module Julia
     end
 
     def build
+      if csv_options[:headers] != false
+        headers = csv_options[:headers] || columns_config.keys
+      end
       CSV.generate(csv_options) do |csv|
-        csv << columns_config.keys
+        csv << headers if headers
 
         collection.each do |record|
           csv << columns_config.values.map do |action|

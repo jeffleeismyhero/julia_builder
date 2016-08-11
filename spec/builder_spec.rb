@@ -53,6 +53,15 @@ RSpec.describe Julia::Builder do
     end
   end
 
+  context 'with csv option to remove header' do
+    let(:csv_options){ {headers: false} }
+    let(:subject){ Test1.new(query, csv_options) }
+
+    it 'pass csv options' do
+      expect(Test1.build(query, csv_options)).to eq "steven\n"
+    end
+  end
+
   context 'given a block' do
     class Test < described_class
       column 'Capital name' do |user|
